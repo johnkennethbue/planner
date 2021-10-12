@@ -1,0 +1,14 @@
+<h1 class="text-5xl text-center">Welcome, John Kenneth!</h1>
+<p class="text-5xl mt-12 text-center">All Categories</p>
+<p class="text-xl mt-4 mb-8 text-center">Select a category to view tasks</p>
+
+<div class="text-center flex flex-wrap flex-col items-center justify-center overflow-x-auto md:flex-row">
+<% @categories.each do |category| %>
+<div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4">
+        <div class="flex border-box p-1 flex-col">
+            <h1 class="text-5xl">  <%= category.title %> </h1>
+            <p class="text-xl mt-8">  <%= category.details %> </p>
+            <%= link_to 'View all Tasks', category, class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
+        </div>
+    </div>
+    <% end %>
