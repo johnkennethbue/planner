@@ -5,6 +5,7 @@ class TasksController < ApplicationController
     # GET /tasks.json
     def index
       @tasks = Task.all
+      @categories = current_user.categories.task
     end
   
     # GET /tasks/1
@@ -14,7 +15,7 @@ class TasksController < ApplicationController
   
     # GET /tasks/new
     def new
-      @task = Task.new
+        @task = current_user.tasks.build
     end
   
     # GET /tasks/1/edit
@@ -24,22 +25,22 @@ class TasksController < ApplicationController
     # POST /tasks
     # POST /tasks.json
     def create
-        @task = Task.new(task_params)
-        respond_to do |format|
+        @task = current_user.tasks.build(task_params)
         if @task.save
-          format.html { redirect_to "/", notice: "Task has been successfully created." }        
+          redirect_to user_task_path(current_user, @task)
+          flash[:notice] = "New Task '#{@task.title}' has been created."
         else
-          format.html { render action: "new" }
+          render :new
         end
       end
-    end
   
     # PATCH/PUT /tasks/1
     # PATCH/PUT /tasks/1.json
     def update
      
         if @task.update(task_params)
-          redirect_to "/", notice: 'Your task was successfully updated.'
+          redirect_to "/"
+          flash[:notice] = "Task '#{@task.title}' has been updated."
         else
           render :edit 
         end
@@ -49,16 +50,17 @@ class TasksController < ApplicationController
     # DELETE /tasks/1.json
     def destroy
        @task.destroy
-        redirect_to @category, notice: 'Your task was successfully deleted.'
+        redirect_to "/" 
+        flash[:notice] = "Task '#{@task.title}' has been deleted."
       end
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_task
         @task = Task.find(params[:id])
       end
-  
+
       # Never trust parameters from the scary internet, only allow the white list through.
       def task_params
-        params.require(:task).permit(:title, :description, :start_date, :due_date, :completed, :category_id)
+        params.require(:task).permit(:title, :description, :start_date, :due_date, :completed, :category_id, :user_id, :priority_task)
       end
     end

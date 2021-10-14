@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  get 'priority_task/index'
+  devise_for :users 
 
-  resources :categories
-  resources :tasks
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_scope :user do
+    authenticated :user do
+      root 'home#index', as: :authenticated_root
+    end
+  
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
+  resources :users do
+    resources :categories
+    resources :tasks
+  end
 end

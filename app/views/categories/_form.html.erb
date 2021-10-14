@@ -1,26 +1,48 @@
-<%= form_with(model: @category, local: true) do |form| %>
+
+<div class="modal-container z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
+   <div class="modal-overlay absolute w-full h-full bg-black opacity-80"> </div>    
+     <div class="modal-container px-2 mb-60 mt-56 bg-white w-auto h-auto md:max-w-md mx-min rounded-xl shadow-lg z-50 ">
+      <div class="modal-close absolute opacity-1 top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-lg z-50">
+  </div>
+<div class="modal-content py-4 text-left px-6 z-50">
+  <div class="flex justify-end items-center pb-3 ">
+   <div class="modal-close cursor-pointer z-50">
+    <%= link_to 'X', "/", class: "text-2xl"%>
+       </div>
+    </div>
+<div>
+    
+<div class = "flex flex-col justify-center items-center">
+<h1 class = "text-2xl"> New/Edit Category </h1>
+<%= form_for [current_user, @category], local: true do |form| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+      <h2 class="text-center text-red-600"><%= pluralize(@category.errors.count, "error") %> </h2>
 
       <ul>
       <% @category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li class="text-center text-red-600"><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.text_field :title, class: "form-control", placeholder: 'Write a title of the category' %>
+    <div class="mt-4">
+    <%= form.label :title, class: "text-xl text-center" %>
+    <%= form.text_field :title, class: "w-full mb-4 content-center mr-40 text-base px-4 py-2 border-b-2 rounded-xl border-gray-500 focus:outline-none focus:border-blue-500", placeholder: 'eg. "Social, Entertainment"' %>
+    <%= form.label :details, class: "text-xl text-center" %>
+    <%= form.text_field :details, class: "w-full mb-4 content-center mr-40 text-base px-4 py-2 border-b-2 rounded-xl border-gray-500 focus:outline-none focus:border-blue-500", placeholder: 'eg. "Workday Tasks"' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :details %>
-    <%= form.text_field :details, class: 'form-control-file' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.submit "Submit", class: "btn btn-primary" %>
+<div class="">
+   <%= link_to 'Cancel', "/", class: "text-center text-sm bg-red-400 rounded py-2 text-white mt-2 w-auto p-8 float-right"%>
+    <%= form.submit class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2 w-auto p-8 float-right mr-4" %>
   </div>
 <% end %>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+

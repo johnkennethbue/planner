@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @categories = Category.all
-    @tasks = Task.all
+    @categories = current_user.categories
+    @tasks = current_user.tasks
   end
 end

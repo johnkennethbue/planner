@@ -5,18 +5,16 @@ class CategoriesController < ApplicationController
     # GET /categories.json
     def index
       @categories = Category.all
-    
     end
   
     # GET /categories/1
     # GET /categories/1.json
     def show
-      @tasks = Task.all
     end
   
     # GET /categories/new
     def new
-      @category = Category.new
+        @category = current_user.categories.build
     end
   
     # GET /categories/1/edit
@@ -26,10 +24,11 @@ class CategoriesController < ApplicationController
     # POST /categories
     # POST /categories.json
     def create
-      @category = Category.new(category_params)
+        @category = current_user.categories.build(category_params)
   
         if @category.save
-          redirect_to "/", notice: 'Category was successfully created.'
+          redirect_to "/"
+          flash[:notice] = "Category '#{@category.title}' has been created."
         else
           render :new
 
@@ -41,7 +40,8 @@ class CategoriesController < ApplicationController
     # PATCH/PUT /categories/1.json
     def update
         if @category.update(category_params)
-        redirect_to "/", notice: 'Category was successfully updated.'
+        redirect_to user_category_path(current_user, @category)
+        flash[:notice] = "Category '#{@category.title}' has been updated."
         else
           render :edit
         end
@@ -55,6 +55,6 @@ class CategoriesController < ApplicationController
   
       # Never trust parameters from the scary internet, only allow the white list through.
       def category_params
-        params.require(:category).permit(:title, :details)
+        params.require(:category).permit(:title, :details, :user_id)
       end
 end

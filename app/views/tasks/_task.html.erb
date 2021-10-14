@@ -3,7 +3,8 @@
         <div class="flex border-box p-1 flex-col">
             <h1 class="text-5xl">  <%= task.title %> </h1>
             <p class="text-xl mb-4 mt-8">  <%= task.description %> </p>
-            <%= link_to 'More Details', task, class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
+            <p class="text-xl mb-4 mt-4"> Completed:  <%= task.completed %> </p>
+            <%= link_to 'More Details', user_task_path(current_user, task), class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
         </div>
     </div>
 </div>

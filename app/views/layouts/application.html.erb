@@ -12,8 +12,9 @@
   </head>
 
   <body>
+   <% if user_signed_in? %>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-  <nav id="header" class="w-full z-30 top-10 py-1 bg-white shadow-lg border-b border-blue-400">
+  <nav id="header" class="w-full z-30 top-10 bg-white shadow-lg border-b border-blue-400">
       <div class="w-full flex items-center justify-between mt-0 px-6 py-2">
          <label for="menu-toggle" class="cursor-pointer md:hidden block">
             <svg class="fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
@@ -21,42 +22,49 @@
                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
             </svg>
          </label>
+
          <input class="hidden" type="checkbox" id="menu-toggle">
          
          <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-1" id="menu">
-            <nav>
+            <nav> 
         <div @click.away="open = false" class="relative" x-data="{ open: false }">
         <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-          <span>My Profile</span>
+          <span class="text-xl font-normal">My Account</span>
           <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
         <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute left-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
           <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
-            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Edit Profile</a>
-            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="#">Sign Out</a>
+            <p class="block px-4 py-2 mt-2 mb-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 bg-gray-200 focus:outline-none focus:shadow-outline"> Logged in as: </br> <%=current_user.email%></p>
+            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-red-300 focus:bg-gray-200 focus:outline-none focus:shadow-outline" %>
           </div>
         </div>
       </div>            
       </nav>
+        <%= link_to "View Priority Tasks", priority_task_index_path(current_user, @tasks), class: "ml-4 bg-blue-600 text-white p-2 rounded border border-gray-300 mr-4 hover:bg-blue-500 hover:text-gray-100" %>
+
          </div>
          
          <div class="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4" id="nav-content">
             <div class="auth flex items-center w-full md:w-full">
                <%= link_to 'Home', "/", class: "bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700" %>
-               <%= link_to 'New Category', new_category_path, class: "bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700" %>
-               <%= link_to 'New Task', new_task_path(@category), class: "bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100" %>
+               <%= link_to 'New Category', new_user_category_path(current_user), class: "bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700" %>
+                 <%= link_to 'New Task', new_user_task_path(current_user), class: "bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100" %> 
             </div>
          </div>
       </div>
    </nav>
+
+ <% if flash[:notice] %>
    <div class='flex flex-row-reverse'>
      <div class="shadow-md p-4 flex flex-row-reverse rounded-lg w-auto">
       <div class="bg-blue-500 inline-block rounded-lg p-1 mr-1"></div>
       <b class="p-2"></b>
-      <p class="p-1"><%= notice %></p>
+      <p class="p-1"> <%= flash[:notice] %></p>
       </a>
     </div>
     </div>
+    <% end %>
+      <%end%>
   </body>
       <%= yield %>
 </html>

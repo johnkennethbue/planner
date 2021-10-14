@@ -1,51 +1,78 @@
-<%= form_for [@category, @task] do |form| %>
+<div class="modal-container z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center">
+   <div class="modal-overlay absolute w-full h-full bg-black opacity-80"> </div>    
+     <div class="modal-container px-2 mb-60 mt-56 bg-white w-auto h-auto md:max-w-md mx-min rounded-xl shadow-lg z-50 ">
+      <div class="modal-close absolute opacity-1 top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-lg z-50">
+  </div>
+<div class="modal-content py-4 text-left px-6 z-50">
+  <div class="flex justify-end items-center pb-3 ">
+   <div class="modal-close cursor-pointer z-50">
+    <%= link_to 'X', "/", class: "text-2xl"%>
+       </div>
+    </div>
+<div>
+    
+<div class = "flex flex-col justify-center items-center">
+<h1 class = "text-2xl"> New/Edit Task </h1>
+<%= form_for [current_user, @task], local: true do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <h2 class="text-center text-red-600"><%= pluralize(@task.errors.count, "error") %> </h2>
 
       <ul>
       <% @task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li class="text-center text-red-600"><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= form.text_field :title, class: 'form-control', placeholder: 'Enter a title for your Task' %>
+  <div class="mt-8">
+    <%= form.label :category, class: "text-xl mr-4" %>
+    <%= form.collection_select(:category_id, current_user.categories, :id, :title, {:prompt => 'Select Category'}) %>
   </div>
 
-  <div class="form-group">
-    <%= form.text_area :description, class: 'form-control', placeholder: 'Enter a description for your Task' %>
+  <div class="mt-4">
+    <%= form.label :title, class: "text-xl text-center" %>
+    <%= form.text_field :title, autocomplete: "false", class: "w-full mb-4 content-center mr-40 text-base px-4 py-2 border-b-2 rounded-xl border-gray-500 focus:outline-none focus:border-blue-500", placeholder: 'eg. "Cleaning this afternoon"' %>
+    <%= form.label :description, class: "text-xl text-center" %>
+    <%= form.text_field :description, autocomplete: "false", class: "w-full mb-4 content-center mr-40 text-base px-4 py-2 border-b-2 rounded-xl border-gray-500 focus:outline-none focus:border-blue-500", placeholder: 'eg. "Carwash included"' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :start_date, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= form.datetime_select :start_date, class: 'form-control' %>
+  <div class="mb-4">
+    <%= form.label :start_date, class: "text-xl mb-2" %>
+    <div class="mt-2">
+      <%= form.date_select :start_date, class: 'border-2 border-black' %>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= form.label :due_date, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= form.datetime_select :due_date, class: 'form-control' %>
+  <div class="mb-4">
+    <%= form.label :due_date, class: "text-xl mb-2" %>
+    <div class="mt-2">
+      <%= form.date_select :due_date, class: 'text-tiny' %>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= form.label :completed, class: "col-sm-2 control-label" %>
+   <div class="form-group">
+    <%= form.label :priority_task, class: "text-xl mr-10" %>
+    <%= form.check_box :priority_task %>
+  </div>
+
+  <div class="form-group mt-2">
+    <%= form.label :completed, class: "text-xl mr-11" %>
     <%= form.check_box :completed %>
   </div>
-
-  <div class="form-group">
-    <%= form.label :category, class: "col-sm-2 control-label" %>
-    <%= form.collection_select(:category_id, Category.all, :id, :title, {:prompt => 'Please select the Category for this task'}) %>
-  </div>
-  <br><br><br>
+  <br>
     
-  <div class="form-group">
-    <%= form.submit class: 'btn btn-primary' %>
+  <div class="">
+   <%= link_to 'Cancel', "/", class: "text-center text-sm bg-red-400 rounded py-2 text-white mt-2 w-auto p-8 float-right"%>
+    <%= form.submit class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2 w-auto p-8 float-right mr-4 hover-pointer" %>
   </div>
 
 <% end %>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
