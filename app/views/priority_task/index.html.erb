@@ -1,19 +1,19 @@
-<h1 class="text-5xl text-center mt-8 font-extralight">Hi <%= current_user.name %>!</h1>
-<p class="text-5xl mt-12 text-center font-light">Priority Tasks</p>
+<h1 class="text-5xl text-center mt-8 font-extralight">Good day, <%= current_user.name %>!</h1>
+<p class="text-6xl mt-9 text-center font-light text-red-500">Priority Tasks</p>
 <p class="text-xl mt-4 mb-8 text-center font-light">You can select/unselect priority tasks under 'Edit Task'</p>
-
+<p class="text-gray-200 text-center mb-4">___________________________________________________________________________________________________</p>
 
 <div class="text-center flex flex-wrap flex-row justify-center items-center overflow-x-auto">
 <% @tasks.each do |task| %>
 <% if task.priority_task == true %>
-    <div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4">
+    <div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4 rounded-3xl ">
         <div class="flex border-box p-1 flex-col">
             <h1 class="text-5xl">  <%= task.title %> </h1>
             <p class="text-2xl mt-4"> Description:  <%= task.description %> </p>
             <p class="text-xl mt-8"> Completed:  <%= task.completed %> </p>
             <p class="text-xl mt-4"> Start Date:  <%= task.start_date %> </p>
             <p class="text-xl mt-4"> Due Date:  <%= task.due_date %> </p>
-            <%= link_to 'Edit Task', edit_user_task_path(current_user, task), class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
+            <%= link_to 'Edit Task', edit_user_task_path(current_user, task), class: "rounded-xl text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
         </div>
     </div>
        <%end%>

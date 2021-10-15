@@ -1,4 +1,4 @@
-<div class="flex flex-col mt-8">
+<div class="flex flex-col mt-4">
 
 
 <h1 class="text-center text-5xl">
@@ -9,12 +9,13 @@
 <%= @category.details %>
 </h3>
 
-<div class='flex flex-row justify-center items-center mt-8 m-8'>
+<div class='flex flex-row justify-center items-center mt-8 m-4'>
 <%= link_to 'Edit this Category', edit_user_category_path(current_user, @category), class: " p-4 w-auto text-center text-sm bg-blue-500 rounded py-2 text-white" %>
 <%= link_to 'Back to All Categories', "/", class: "ml-10 p-4 w-auto text-center text-sm bg-blue-500 rounded py-2 text-white" %>
 </div>
+<p class="text-gray-200 text-center mb-2">___________________________________________________________________________________________________</p>
 
-<h1 class='text-center text-4xl mt-4'> All Tasks </h1>
+<h1 class='text-center text-5xl text-blue-600 font-light'> All Tasks </h1>
 <div class='flex flex-row justify-center items-center mt-4 flex-wrap'>
 <%= render @category.tasks %>
 </div>

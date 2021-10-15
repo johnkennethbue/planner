@@ -1,7 +1,7 @@
-<h1 class="text-5xl text-center mt-8 font-extralight">Hi <%= current_user.name %>!</h1>
-<p class="text-5xl mt-12 text-center font-light">All Categories</p>
+<h1 class="text-5xl text-center mt-8 font-extralight">Good day, <%= current_user.name %>!</h1>
+<p class="text-6xl mt-10 text-center font-light text-blue-700">All Categories</p>
 <p class="text-xl mt-4 mb-8 text-center font-light">Select a category to view tasks</p>
-
+<p class="text-gray-200 text-center mb-4">___________________________________________________________________________________________________</p>
 <div class="text-center flex flex-wrap flex-col items-center justify-center overflow-x-auto md:flex-row">
 <% @categories.each do |category| %>
 <div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4">

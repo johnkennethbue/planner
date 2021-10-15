@@ -39,7 +39,7 @@ class TasksController < ApplicationController
     def update
      
         if @task.update(task_params)
-          redirect_to "/"
+          redirect_to user_task_path(current_user, @task)
           flash[:notice] = "Task '#{@task.title}' has been updated."
         else
           render :edit 
