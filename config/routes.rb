@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'task_today/index'
   get 'priority_task/index'
   devise_for :users 
 

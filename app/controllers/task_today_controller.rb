@@ -1,4 +1,4 @@
-class PriorityTaskController < ApplicationController
+class TaskTodayController < ApplicationController
   def index
     @tasks = current_user.tasks
   end

@@ -28,7 +28,7 @@
 
   <div class="mt-8">
     <%= form.label :category, class: "text-l mr-4" %>
-    <%= form.collection_select(:category_id, current_user.categories, :id, :title, {:prompt => 'Select Category'}, class: "form-select outline-none border-2 rounded px-1" )%>
+    <%= form.collection_select(:category_id, current_user.categories, :id, :title, {:prompt => 'Select Category'}, class: "form-select outline-none border-2 rounded px-1 py-1" )%>
   </div>
 
   <div class="mt-4">

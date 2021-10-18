@@ -8,4 +8,5 @@ class User < ApplicationRecord
   
          validates_presence_of :name, :message => " field can't be blank. "
          validates_presence_of :surname, :message => " field can't be blank. "
+         validates_confirmation_of :password
 end

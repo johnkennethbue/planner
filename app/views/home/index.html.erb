@@ -5,11 +5,18 @@
 <div class="text-center flex flex-wrap flex-col items-center justify-center overflow-x-auto md:flex-row">
 <% @categories.each do |category| %>
 <div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4">
+
         <div class="flex border-box p-1 flex-col">
-            <h1 class="text-5xl">  <%= category.title %> </h1>
-            <p class="text-xl mt-8">  <%= category.details %> </p>
+            <h1 class="text-4xl">  <%= category.title %> </h1>
+            <p class="text-l mt-8">  <%= category.details %> </p>
+            <% if category.tasks.size == 0 %>
+            <p class="text-xl mt-8"> No task/s available </p>
+            <%else%>
             <p class="text-xl mt-8">   <%= pluralize(category.tasks.size, "task") %></p>
+            <%end%>
             <%= link_to 'View all Tasks', user_category_path(current_user, category), class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
         </div>
     </div>
-<% end %>
+<%end%>
+
+   

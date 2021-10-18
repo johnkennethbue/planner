@@ -11,11 +11,11 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="bg-gray-100">
    <% if user_signed_in? %>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
   <nav id="header" class="w-full z-30 top-10 bg-white shadow-lg border-b border-blue-400">
-      <div class="w-full flex items-center justify-between mt-0 px-6 py-2">
+      <div class="w-full flex items-center justify-between mt-0 px-1 py-2">
          <label for="menu-toggle" class="cursor-pointer md:hidden block">
             <svg class="fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                <title>menu</title>
@@ -40,21 +40,23 @@
         </div>
       </div>            
       </nav>
-        <%= link_to "View Priority Tasks", priority_task_index_path(current_user, @tasks), class: "ml-4 bg-blue-600 text-white p-2 rounded border border-gray-300 mr-4 hover:bg-blue-500 hover:text-gray-100" %>
-
+        <%= link_to "View Priority Tasks", priority_task_index_path(current_user, @tasks), class: "text-sm ml-4 bg-blue-500 text-white p-2 rounded border border-gray-300 mr-4 hover:bg-blue-600 hover:text-gray-100" %>
+        <%= link_to 'View Tasks Due Today', task_today_index_path(current_user, @tasks), class: "text-sm bg-red-700 text-gray-200  p-2 rounded  hover:bg-red-600 hover:text-gray-100" %> 
+        <%= image_tag "logo_session_navbar.png", class: "ml-48" %>
          </div>
          
          <div class="order-2 md:order-3 flex flex-wrap items-center justify-end mr-0 md:mr-4" id="nav-content">
             <div class="auth flex items-center w-full md:w-full">
-               <%= link_to 'Home', "/", class: "bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700" %>
-               <%= link_to 'New Category', new_user_category_path(current_user), class: "bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700" %>
-                 <%= link_to 'New Task', new_user_task_path(current_user), class: "bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100" %> 
+               <%= link_to 'Home', "/", class: "text-sm bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700" %>
+               <%= link_to 'New Category', new_user_category_path(current_user), class: "text-sm bg-transparent text-gray-800  p-2 rounded border border-gray-300 mr-4 hover:bg-gray-100 hover:text-gray-700" %>
+               <%= link_to 'New Task', new_user_task_path(current_user), class: "text-sm bg-blue-600 text-gray-200  p-2 rounded  hover:bg-blue-500 hover:text-gray-100" %> 
             </div>
          </div>
       </div>
    </nav>
 
- <% if flash[:notice] %>
+
+ <% if flash[:notice].present? %>
    <div class='flex flex-row-reverse'>
      <div class="shadow-md p-4 flex flex-row-reverse rounded-lg w-auto">
       <div class="bg-blue-500 inline-block rounded-lg p-1 mr-1"></div>

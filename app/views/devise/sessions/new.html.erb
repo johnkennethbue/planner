@@ -1,9 +1,13 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-<div class="flex items-center min-h-screen bg-white dark:bg-gray-900">
+<div class="flex flex-row h-full w-screen items-center min-h-screen bg-white dark:bg-gray-900">
+  <div class="flex flex-row w-screen h-screen">
+   <%= image_tag "bg_session.jpg" %>
+  </div>
     <div class="container mx-auto">
-        <div class="max-w-md mx-auto my-10">
+        <div class="max-w-md mx-auto my-12">
             <div class="text-center">
+                 <%= image_tag "logo_session.png", class: "ml-32"%>
                 <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">Welcome to Planner App</h1>
                 <p class="text-gray-500 dark:text-gray-400">Log in to your account to continue</p>
                   <% if flash[:alert].present? %>
