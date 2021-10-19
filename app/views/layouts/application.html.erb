@@ -12,9 +12,9 @@
   </head>
 
   <body class="bg-gray-100">
-   <% if user_signed_in? %>
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-  <nav id="header" class="w-full z-30 top-10 bg-white shadow-lg border-b border-blue-400">
+   <% if user_signed_in? %>
+  <nav id="header" class="fixed z-30 top-0 left-0 right-0 bg-white shadow-lg border-b border-blue-400">
       <div class="w-full flex items-center justify-between mt-0 px-1 py-2">
          <label for="menu-toggle" class="cursor-pointer md:hidden block">
             <svg class="fill-current text-blue-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
