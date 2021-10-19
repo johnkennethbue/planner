@@ -5,16 +5,18 @@
 <div class="text-center flex flex-wrap flex-col items-center justify-center overflow-x-auto md:flex-row">
 <% @categories.each do |category| %>
 <div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4">
-
         <div class="flex border-box p-1 flex-col">
             <h1 class="text-4xl">  <%= category.title %> </h1>
-            <p class="text-l mt-8">  <%= category.details %> </p>
+            <p class="text-l mt-4">  <%= category.details %> </p>
+            <p class="text-l mt-2 text-gray-400"> Creation Date: <%= category.created_at.to_date %> </p>
+            <p class="text-l mt-2 text-gray-400"> Last Updated: <%= category.updated_at.to_date %> </p>
+            <p class="text-gray-200 text-center mb-1">_______________________________________</p>
             <% if category.tasks.size == 0 %>
-            <p class="text-xl mt-8"> No task/s available </p>
+            <p class="text-xl mt-1"> No task/s available </p>
             <%else%>
-            <p class="text-xl mt-8">   <%= pluralize(category.tasks.size, "task") %></p>
+            <p class="text-xl mt-1">   <%= pluralize(category.tasks.size, "task") %></p>
             <%end%>
-            <%= link_to 'View all Tasks', user_category_path(current_user, category), class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
+            <%= link_to 'View all Tasks', user_category_path(current_user, category), class: "text-center text-sm bg-blue-500 rounded py-2 text-white mt-2 hover:bg-blue-600" %>
         </div>
     </div>
 <%end%>

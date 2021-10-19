@@ -1,19 +1,26 @@
 <h1 class="text-5xl text-center mt-8 font-extralight">Good day, <%= current_user.name %>!</h1>
-<p class="text-6xl mt-9 text-center font-light text-red-500">Tasks Due Today</p>
+<p class="text-5xl mt-9 text-center font-light text-red-500">Tasks Due Today & Not Completed</p>
 <p class="text-xl mt-4 mb-8 text-center font-light">You can change the due date of your tasks under 'Edit Task'</p>
 <p class="text-gray-200 text-center mb-4">___________________________________________________________________________________________________</p>
 
 <div class="text-center flex flex-wrap flex-col items-center justify-center overflow-x-auto md:flex-row">
 <% @tasks.each do |task| %>
-<% if task.due_date == Date.current %>
+<% if task.due_date == Date.current && task.completed == false %>
     <div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4 rounded-3xl ">
         <div class="flex border-box p-1 flex-col">
             <h1 class="text-4xl">  <%= task.title %> </h1>
             <p class="text-xl mt-4"> Description:  <%= task.description %> </p>
-            <p class="text-l mt-8"> Completed:  <%= task.completed %> </p>
-            <p class="text-l mt-4"> Start Date:  <%= task.start_date.to_date %> </p>
-            <p class="text-l mt-4 text-red-400"> Due Date:  <%= task.due_date.to_date %> (Today's date) </p>
-            <%= link_to 'Edit Task', edit_user_task_path(current_user, task), class: "rounded-xl text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
+            <p class="text-gray-200 text-center mb-1">_______________________________________</p>
+
+            <% if task.completed == true %>
+            <p class="text-l mt-2 text-blue-500"> Completed Task?: Yes! 😀  </p>
+            <%else%>
+            <p class="text-l mt-2 text-red-500"> Completed Task?: Not yet 🙁 </p>
+            <%end%>
+
+            <p class="text-l mt-1"> Start Date:  <%= task.start_date.to_date %> </p>
+            <p class="text-l mt-1 text-red-400"> Due Date:  <%= task.due_date.to_date %> (Today's date) </p>
+            <%= link_to 'Edit Task', edit_user_task_path(current_user, task), class: "hover:bg-blue-600 rounded-xl text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
             </div>
         </div>
 <%end%>

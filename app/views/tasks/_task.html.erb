@@ -2,10 +2,24 @@
 <div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4 flex flex-col rounded-3xl">
         <div class="flex border-box p-1 flex-col">
             <h1 class="text-4xl">  <%= task.title %> </h1>
-            <p class="text-xl mb-4 mt-8">  <%= task.description %> </p>
-            <p class="text-l mb-4 mt-2 text-red-400"> Completed:  <%= task.completed %> </p>
-            <p class="text-l mb-4 text-blue-500"> Priority Task:  <%= task.priority_task %> </p>
-            <%= link_to 'More Details', user_task_path(current_user, task), class: "rounded-xl text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
+            <p class="text-xl  mt-4 mb-2">  <%= task.description %> </p>
+            <p class="text-l text-gray-400"> Creation Date:  <%= task.created_at.to_date %> </p>
+            <p class="text-l text-gray-400"> Last Modified:  <%= task.updated_at.to_date %> </p>
+            <p class="text-gray-200 text-center mb-2">_______________________________________</p>
+
+            <% if task.completed == true %>
+            <p class="text-l mt-1 text-blue-500"> Completed Task?: Yes! 😀 </p>
+            <%else%>
+            <p class="text-l mt-1 text-red-500"> Completed Task?: Not yet 🙁 </p>
+            <%end%>
+
+            <p class="text-l text-blue-500"> Priority Task:  <%= task.priority_task %> </p>
+            <%if task.due_date == Date.current %>
+            <p class="text-l text-red-500"> Due Today: Yes</p>
+            <%else%>
+            <p class="text-l text-blue-400"> Due Today: No</p>
+            <%end%>
+            <%= link_to 'More Details', user_task_path(current_user, task), class: "hover:bg-blue-600 rounded-xl text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
         </div>
     </div>
 </div>
