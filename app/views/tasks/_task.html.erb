@@ -13,13 +13,18 @@
             <p class="text-l mt-1 text-red-500"> Completed Task?: Not yet 🙁 </p>
             <%end%>
 
-            <p class="text-l text-blue-500"> Priority Task:  <%= task.priority_task %> </p>
+            <% if task.priority_task == true %>
+            <p class="text-l text-blue-500"> Priority task?: Yes! </p>
+            <%else%>
+            <p class="text-l mt-1 text-red-500"> Priority Task?: No </p>
+            <%end%>
+
             <%if task.due_date == Date.current %>
             <p class="text-l text-red-500"> Due Today: Yes</p>
             <%else%>
             <p class="text-l text-blue-400"> Due Today: No</p>
             <%end%>
-            <%= link_to 'More Details', user_task_path(current_user, task), class: "hover:bg-blue-600 rounded-xl text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
+            <%= link_to 'Go to Edit/Delete Task', user_task_path(current_user, task), class: "hover:bg-blue-600 rounded-xl text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
         </div>
     </div>
 </div>

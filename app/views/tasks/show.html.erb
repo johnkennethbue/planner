@@ -1,10 +1,11 @@
-<div class="text-center flex flex-wrap flex-col items-center justify-center overflow-x-auto md:flex-col pt-16">
+<div class="text-center flex flex-wrap flex-col items-center justify-center overflow-x-auto md:flex-col mt-8">
 <div class="h-min w-auto p-2 bg-white rounded xl border-2 border-black m-4 rounded-3xl">
         <div class="flex border-box p-1 flex-col">
             <h1 class="text-5xl">  <%= @task.title %> </h1>
             <p class="text-2xl mt-4"> Description:  <%= @task.description %> </p>
+            <p class="text-l text-gray-400 mt-4"> Creation Date:  <%= @task.created_at.to_date %> </p>
+            <p class="text-l text-gray-400"> Last Modified:  <%= @task.updated_at.to_date %> </p>
             <p class="text-gray-200 text-center mb-1">____________________________________________</p>
-            <p class="text-xl mt-1"> Completed:  <%= @task.completed %> </p>
             <p class="text-xl mt-2"> Start Date:  <%= @task.start_date.to_date %> </p>
 
             <%if @task.due_date == Date.current%>
