@@ -21,8 +21,10 @@
 
             <%if task.due_date == Date.current %>
             <p class="text-l text-red-500"> Due Today: Yes</p>
+            <p class="text-s text-gray-400 font-light"> (can be viewed on Tasks Due Today if not completed)</p>
             <%else%>
-            <p class="text-l text-blue-400"> Due Today: No</p>
+            <p class="text-l text-blue-500"> Due Today: No</p>
+            <p class="text-l text-blue-500"> Due on:  <%= task.due_date.to_date %> </p>
             <%end%>
             <%= link_to 'Go to Edit/Delete Task', user_task_path(current_user, task), class: "hover:bg-blue-600 rounded-xl text-center text-sm bg-blue-500 rounded py-2 text-white mt-2" %>
         </div>
